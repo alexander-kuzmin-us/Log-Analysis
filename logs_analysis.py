@@ -68,3 +68,44 @@ def get_top_article_authors():
     for result in results:
         print('"{author}" - {num} total views').
         format(author=result[0], num=result[1]))
+
+
+# 3. Days which more then 1% of HTTP requests errors
+def get_days_with_more_than_one_percent_errors():
+    # Query String 3
+    query = """
+    SELECT requests.date, 100*errors.errors_count/requests.requests_count
+    AS percent
+    FROM
+    (SELECT date_trunc('day', log.time) AS "date", count(*) AS errors_count
+    FROM log
+    WHERE log.status != '200 OK'
+    GROUP BY date
+    ORDER BY date) AS errors
+    JOIN
+    (SELECT date_trunc('day', log.time) AS "date", count(*) AS requests_count
+    FROM log
+    GROUP BY date
+    ORDER BY date) AS requests
+    ON errors.date = requests.date
+    WHERE 100*errors.errors_count/requests.requests_count > 1
+    ORDER BY percent
+    DESC;
+    """
+
+    # Run Query 3
+    results = run_query(query)
+
+    # Print Results 2
+    print('DAY WITH MORE THAN 1 PERCENT ERRORS:\n')
+    for result in results:
+        print('"{day}" - {percent}% errors'.
+        format(day=result[0].strftime('%B %d, %Y'), percent=result[1]))
+
+
+print('\nYour request is in progress, please wait...\n')
+get_top_three_articles()
+print('\nThe next request is in progress...\n')
+get_top_article_authors()
+print('\nAlmost done. Wait a second...\n')
+get_days_with_more_than_one_percent_errors()
