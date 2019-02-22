@@ -27,7 +27,7 @@ def get_top_three_articles():
 # articles ON slug and path. And Substr 10 char lengh str from path in log to
 # find a matched  slug in articles)
     query = """
-    SELECT title COUNT(*) AS num
+    SELECT title, COUNT(*) AS num
     FROM articles
     JOIN log
     ON articles.slug LIKE substr(log.path, 10)
@@ -40,7 +40,31 @@ def get_top_three_articles():
 # Run Query 1
     result = run_query(query)
 # Print result Query 1
-print ('TOP 3 MOST POPULAR ARTICLES OF ALL TIME\n')
+print ('TOP 3 MOST POPULAR ARTICLES OF ALL TIME:\n')
 for result in results:
     print('"{title}" - {num} total views').
     format(title=result[0], num=result[1]))
+
+# 2. Most popular authors
+def get_top_article_authors():
+# Query 2
+    query = """
+    SELECT authors.name, COUNT(*) AS num
+    FROM authors
+    JOIN articles
+    ON autors.id = articles.autor
+    JOIN log
+    ON articles.slug LIKE substr(log.path, 10)
+    GROUP BY autors.name,
+    ORDER BY num
+    DESC
+    LIMIT 3;
+    """
+# Run Query 2
+    result = run_query(query)
+
+# Print result 2
+    print('TOP 3 MOST POPULAR AUTHORS:\n')
+    for result in results:
+        print('"{author}" - {num} total views').
+        format(author=result[0], num=result[1]))
