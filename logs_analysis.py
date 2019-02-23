@@ -13,7 +13,7 @@ def run_query(query):
     try:
         con = psycopg2.connect(database=DBNAME)
     except psycopg2.DatabaseError:
-        print("I am unable to connect to the database")
+        sis.exit("I am unable to connect to the database")
     cursor = con.cursor()
     cursor.execute(query)
     rows = cursor.fetchall()
