@@ -105,8 +105,8 @@ def get_days_with_more_than_one_percent_errors():
         print('"{day}" - {percent}% errors'.
         format(day=result[0].strftime('%B %d, %Y'), percent=result[1]))
 
-
-print('\nYour request is in progress, please wait...\n')
+if __name__ == '__main__':
+    print('\nYour request is in progress, please wait...\n')
 get_top_three_articles()
 print('\nThe next request is in progress...\n')
 get_top_article_authors()
