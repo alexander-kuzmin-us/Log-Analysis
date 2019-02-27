@@ -38,7 +38,7 @@ Run Log-Analysis.py
 Make sure you are in the vagrant directory `pwd`
 then run `python log_analysis.py`
 
-**Expected output**
+**Expected output:**
 
 TOP THREE MOST POPULAR ARTICLES OF ALL TIME:
 
@@ -46,7 +46,6 @@ TOP THREE MOST POPULAR ARTICLES OF ALL TIME:
 "Bears love berries, alleges bear" - 253801 total views
 "Bad things gone, say good people" - 170098 total views
 
-The next request is in progress...
 
 TOP THREE MOST POPULAR AUTHORS OF ALL TIME:
 
@@ -54,7 +53,6 @@ TOP THREE MOST POPULAR AUTHORS OF ALL TIME:
 "Rudolf von Treppenwitz" - 423457 total views
 "Anonymous Contributor" - 170098 total views
 
-Almost done. Wait a second...
 
 DAY WITH MORE THAN 1 PERCENT ERRORS:
 
