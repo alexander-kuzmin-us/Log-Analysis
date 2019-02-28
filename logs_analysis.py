@@ -22,9 +22,9 @@ def run_query(query):
 
 
 # 1. Most popular articles
-# Query 1 (I used the JOIN clause to select titles from 2 tables log and
-# articles ON slug and path. And Substr 10 char lengh str from path in log to
-# find a matched  slug in articles)
+# Query 1 (I used the JOIN clause to select titles from 2 tables <log> and
+# <articles> ON `slug` and `path`. And <Substr 10 char length str> from a `path`
+# in a <log> to find a matched  `slug` from <articles>)
 def get_top_three_articles():
 # Query String 1
     query = """
