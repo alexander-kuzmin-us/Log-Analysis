@@ -43,14 +43,18 @@ then run `python log_analysis.py`
 TOP THREE MOST POPULAR ARTICLES OF ALL TIME:
 
 "Candidate is jerk, alleges rival" - 338647 total views
+
 "Bears love berries, alleges bear" - 253801 total views
+
 "Bad things gone, say good people" - 170098 total views
 
 
 TOP THREE MOST POPULAR AUTHORS OF ALL TIME:
 
 "Ursula La Multa" - 507594 total views
+
 "Rudolf von Treppenwitz" - 423457 total views
+
 "Anonymous Contributor" - 170098 total views
 
 
