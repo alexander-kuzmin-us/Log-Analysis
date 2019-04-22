@@ -1,8 +1,8 @@
-# **Log Analysis Project**
+# **Log Analysis Project
 
 This is a tool for log Analysis project for [Full Stack Web Developer Nanodegree on Udacity](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
-## **Software tools and skills in used in this project**
+## **Software tools and skills in used in this project
 
 - Python
 - Git
@@ -14,16 +14,17 @@ This is a tool for log Analysis project for [Full Stack Web Developer Nanodegree
 - CRUD
 - Vagrant
 
-This reporting tool is in Python written program using the psycopg2 module to connect to the database.
-It's qerys would return the answers to the three questions in plain text.
 
-## **The questions are:**
+**This reporting tool is in Python written program using the psycopg2 module to connect to the database.
+It's qerys would return the answers to the three questions in plain text.**
+
+## **The questions are:
 
 1. What are the most popular three articles of all time?
 2. Who are the most popular article authors of all time?
 3. On which days did more than 1% of requests lead to errors?
 
-### **Setup steps:**
+### **Setup steps:
 
 Installing and setting up the files:
 
@@ -37,20 +38,18 @@ Installing and setting up the files:
 
 5. Put all files from Log_Analysis folder into the vagrant directory.
 
-**Start the Virtual Machine:**
+**Start the Virtual Machine:
 
 1. Open Terminal and `cd` into the vagrant directory.
 2. Run `vagrant up` to build the VM.
 3. Then run `vagrant ssh` to connect to VM.
 4. `cd` into the correct project directory: cd /vagrant.
 5. Load the data by using: '<psql -d news -f newsdata.sql>'
+6. Run Log-Analysis.py
+   Make sure you are in the vagrant directory `pwd`
+   then run `python log_analysis.py`
 
-Run Log-Analysis.py
-
-Make sure you are in the vagrant directory `pwd`
-then run `python log_analysis.py`
-
-**Expected output:**
+**Expected output:
 
 TOP THREE MOST POPULAR ARTICLES OF ALL TIME:
 
@@ -75,4 +74,4 @@ DAY WITH MORE THAN 1 PERCENT ERRORS:
 "July 17, 2016" - 2% errors
 
 
-*Aleksandr Kuzmin* [e-mail:](alex.kuzminn@gmal.com)
+*Aleksandr Kuzmin* alex.kuzminn@gmal.com
