@@ -2,7 +2,7 @@
 
 This is a tool for log Analysis project for [Full Stack Web Developer Nanodegree on Udacity](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
-## Software tools and skills in used in this project
+## Software tools and skills used in this project
 
 - Python
 - Git
