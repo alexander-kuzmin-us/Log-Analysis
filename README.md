@@ -2,8 +2,20 @@
 
 This is a tool for log Analysis project for [Full Stack Web Developer Nanodegree on Udacity](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
-This reporting tool is a Python program using the psycopg2 module to connect to the database.
-It would return the answers to the three questions in plain text.
+## **Software tools and skills in used in this project**
+
+- Python
+- Git
+- GitHub
+- Unix shell
+- Relational Databases
+- SQL
+- PostgreSQL
+- CRUD
+- Vagrant
+
+This reporting tool is in Python written program using the psycopg2 module to connect to the database.
+It's qerys would return the answers to the three questions in plain text.
 
 ## **The questions are:**
 
@@ -62,4 +74,5 @@ DAY WITH MORE THAN 1 PERCENT ERRORS:
 
 "July 17, 2016" - 2% errors
 
-*Aleksandr Kuzmin*
+
+*Aleksandr Kuzmin* [e-mail:](alex.kuzminn@gmal.com)
