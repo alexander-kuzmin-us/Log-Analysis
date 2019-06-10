@@ -1,6 +1,6 @@
 # Log Analysis Project
 
-This is a analytical tool for log Analysis project for [Full Stack Web Developer Nanodegree on Udacity](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
+This is an analytical tool for log Analysis project for [Full Stack Web Developer Nanodegree on Udacity](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
 ## Software tools and skills used in this project
 
