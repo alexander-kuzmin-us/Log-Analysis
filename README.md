@@ -7,6 +7,7 @@ This is an analytical tool for log Analysis project for [Full Stack Web Develope
 - Python
 - Git
 - GitHub
+- Linux 
 - Unix shell
 - Relational Databases
 - SQL
