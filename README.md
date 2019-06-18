@@ -50,7 +50,7 @@ Installing and setting up the files:
    Make sure you are in the vagrant directory `pwd`
    then run `python log_analysis.py`
 
-**Expected result:**
+**Expected result**
 
 TOP THREE MOST POPULAR ARTICLES OF ALL TIME:
 
