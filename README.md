@@ -19,7 +19,7 @@ This is an analytical tool for log Analysis project for [Full Stack Web Develope
 **This reporting tool is in Python written program using the psycopg2 module to connect to the database.
 It's qerys would return the answers to the three questions in plain text.**
 
-## The questions are:
+## The questions are::
 
 1. What are the most popular 3 articles of all time?
 2. Who are the most popular article authors of all time?
