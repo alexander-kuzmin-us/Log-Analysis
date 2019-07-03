@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Udacity Full Stack Web Developer Nanodegree - Loganalysis Project
+# Udacity Full Stack Web Developer Nanodegree - Loganalysis Project.
 
 import psycopg2
 
