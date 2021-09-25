@@ -28,14 +28,14 @@ def run_query(query):
 def get_top_three_articles():
 # Query String 1
     query = """
-    SELECT title, COUNT(*) as num
-    FROM articles
-    JOIN log
-    ON articles.slug LIKE substr(log.path, 10)
-    GROUP BY title
-    ORDER BY num DESC
-    LIMIT 3;
-    """
+        SELECT title, COUNT(*) as num
+            FROM articles
+                JOIN log
+                ON articles.slug LIKE substr(log.path, 10)
+                GROUP BY title
+                ORDER BY num DESC
+                LIMIT 3;
+                """
 
 # Run Query 1
     results = run_query(query)
@@ -52,16 +52,16 @@ def get_top_article_authors():
 
 # Query 2 String
     query = """
-    SELECT authors.name, COUNT(*) AS num
-    FROM authors
-    JOIN articles
-    ON authors.id = articles.author
-    JOIN log
-    ON articles.slug LIKE substr(log.path, 10)
-    GROUP BY authors.name
-    ORDER BY num DESC
-    LIMIT 3;
-    """
+        SELECT authors.name, COUNT(*) AS num
+            FROM authors
+            JOIN articles
+            ON authors.id = articles.author
+            JOIN log
+            ON articles.slug LIKE substr(log.path, 10)
+            GROUP BY authors.name
+            ORDER BY num DESC
+            LIMIT 3;
+            """
 
 # Run Query 2
     results = run_query(query)
@@ -77,24 +77,24 @@ def get_top_article_authors():
 def get_days_with_more_than_one_percent_errors():
     # Query String 3
     query = """
-    SELECT requests.date, 100*errors.errors_count/requests.requests_count
-    AS percent
-    FROM
-    (SELECT date_trunc('day', log.time) AS "date", count(*) AS errors_count
-    FROM log
-    WHERE log.status != '200 OK'
-    GROUP BY date
-    ORDER BY date) AS errors
-    JOIN
-    (SELECT date_trunc('day', log.time) AS "date", count(*) AS requests_count
-    FROM log
-    GROUP BY date
-    ORDER BY date) AS requests
-    ON errors.date = requests.date
-    WHERE 100*errors.errors_count/requests.requests_count > 1
-    ORDER BY percent
-    DESC;
-    """
+        SELECT requests.date, 100*errors.errors_count/requests.requests_count
+        AS percent
+            FROM
+            (SELECT date_trunc('day', log.time) AS "date", count(*) AS errors_count
+            FROM log
+                WHERE log.status != '200 OK'
+                GROUP BY date
+                ORDER BY date) AS errors
+                JOIN
+                (SELECT date_trunc('day', log.time) AS "date", count(*) AS requests_count
+                FROM log
+                GROUP BY date
+                ORDER BY date) AS requests
+                ON errors.date = requests.date
+                WHERE 100*errors.errors_count/requests.requests_count > 1
+                ORDER BY percent
+                DESC;
+                """
 
     # Run Query 3
     results = run_query(query)
@@ -106,9 +106,9 @@ def get_days_with_more_than_one_percent_errors():
         format(day=result[0].strftime('%B %d, %Y'), percent=result[1]))
 
 if __name__ == '__main__':
-    print('\nYour request is in progress, please wait...\n')
+    print('\n Your request is in progress, please wait...\n')
 get_top_three_articles()
-print('\nThe next request is in progress...\n')
+print('\n The next request is in progress...\n')
 get_top_article_authors()
-print('\nAlmost done. Wait a second...\n')
+print('\n Almost done. Wait a second...\n')
 get_days_with_more_than_one_percent_errors()
