@@ -74,4 +74,4 @@ DAY WITH MORE THAN 1 PERCENT ERRORS:
 "July 17, 2016" - 2% errors
 
 
-*Alex Kuzmin* alex.kuzminn@gmal.com
+*Alex Kuzmin*
