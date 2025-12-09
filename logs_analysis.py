@@ -44,18 +44,17 @@ def run_query(query):
 
 def get_top_three_articles():
     """
-    Find the three most popular articles of all time.
+    Find the three most popular articles of all time by using the
+    article_views view.
     
     Returns:
         None: Prints results directly
     """
     query = """
-        SELECT articles.title, COUNT(*) as views
-        FROM articles
-        JOIN log ON articles.slug = SUBSTRING(log.path, 10)
-        WHERE log.path LIKE '/article/%'
-        GROUP BY articles.title
-        ORDER BY views DESC
+        SELECT a.title, v.views
+        FROM articles a
+        JOIN article_views v ON a.slug = v.slug
+        ORDER BY v.views DESC
         LIMIT 3;
     """
     
@@ -70,19 +69,19 @@ def get_top_three_articles():
 
 def get_top_article_authors():
     """
-    Find the most popular article authors of all time.
+    Find the most popular article authors of all time by using the
+    article_views view.
     
     Returns:
         None: Prints results directly
     """
     query = """
-        SELECT authors.name, COUNT(*) AS views
+        SELECT authors.name, SUM(article_views.views) AS total_views
         FROM authors
         JOIN articles ON authors.id = articles.author
-        JOIN log ON articles.slug = SUBSTRING(log.path, 10)
-        WHERE log.path LIKE '/article/%'
+        JOIN article_views ON articles.slug = article_views.slug
         GROUP BY authors.name
-        ORDER BY views DESC
+        ORDER BY total_views DESC
         LIMIT 3;
     """
     
@@ -97,33 +96,18 @@ def get_top_article_authors():
 
 def get_days_with_more_than_one_percent_errors():
     """
-    Find days where more than 1% of requests led to errors.
+    Find days where more than 1% of requests led to errors by using the
+    daily_logs view.
     
     Returns:
         None: Prints results directly
     """
     query = """
-        WITH daily_requests AS (
-            SELECT 
-                DATE(time) AS day,
-                COUNT(*) AS total_requests
-            FROM log
-            GROUP BY day
-        ),
-        daily_errors AS (
-            SELECT 
-                DATE(time) AS day,
-                COUNT(*) AS error_count
-            FROM log
-            WHERE status != '200 OK'
-            GROUP BY day
-        )
-        SELECT 
-            TO_CHAR(dr.day, 'Month DD, YYYY') AS formatted_date,
-            ROUND((de.error_count * 100.0 / dr.total_requests), 1) AS error_percentage
-        FROM daily_requests dr
-        JOIN daily_errors de ON dr.day = de.day
-        WHERE (de.error_count * 100.0 / dr.total_requests) > 1.0
+        SELECT
+            TO_CHAR(day, 'Month DD, YYYY') AS formatted_date,
+            ROUND((error_requests * 100.0 / total_requests), 1) AS error_percentage
+        FROM daily_logs
+        WHERE (error_requests * 100.0 / total_requests) > 1.0
         ORDER BY error_percentage DESC;
     """
     
@@ -136,9 +120,58 @@ def get_days_with_more_than_one_percent_errors():
     return results
 
 
+def run_ddl_query(query):
+    """
+    Execute a DDL query, like creating a view.
+    No results are returned from this function.
+    """
+    conn = connect_to_database()
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+    conn.close()
+
+
+def create_article_views():
+    """
+    Create a view that summarizes article views.
+    This view will be used in other queries.
+    """
+    query = """
+        CREATE OR REPLACE VIEW article_views AS
+        SELECT
+            articles.slug,
+            COUNT(*) AS views
+        FROM articles
+        JOIN log ON articles.slug = SUBSTRING(log.path, 10)
+        WHERE log.path LIKE '/article/%'
+        GROUP BY articles.slug;
+    """
+    run_ddl_query(query)
+
+
+def create_daily_logs_view():
+    """
+    Create a view that summarizes daily log requests and errors.
+    This view will be used to find days with high error rates.
+    """
+    query = """
+        CREATE OR REPLACE VIEW daily_logs AS
+        SELECT
+            DATE(time) AS day,
+            COUNT(*) AS total_requests,
+            SUM(CASE WHEN status != '200 OK' THEN 1 ELSE 0 END) AS error_requests
+        FROM log
+        GROUP BY day;
+    """
+    run_ddl_query(query)
+
+
 def main():
     """Execute all queries and display results."""
     print("Analyzing newspaper logs...")
+    create_article_views()
+    create_daily_logs_view()
     get_top_three_articles()
     get_top_article_authors()
     get_days_with_more_than_one_percent_errors()
