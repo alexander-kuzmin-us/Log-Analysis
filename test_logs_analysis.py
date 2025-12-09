@@ -4,11 +4,14 @@ from logs_analysis import (
     get_top_three_articles,
     get_top_article_authors,
     get_days_with_more_than_one_percent_errors,
+    create_article_views,
+    create_daily_logs_view,
 )
 
 class TestLogAnalysis(unittest.TestCase):
 
     @patch('logs_analysis.run_query')
+    @patch('logs_analysis.create_article_views', MagicMock())
     def test_get_top_three_articles(self, mock_run_query):
         # Mock the run_query function to return a predefined result
         mock_run_query.return_value = [
@@ -27,6 +30,7 @@ class TestLogAnalysis(unittest.TestCase):
         self.assertEqual(result[2][0], 'Article C')
 
     @patch('logs_analysis.run_query')
+    @patch('logs_analysis.create_article_views', MagicMock())
     def test_get_top_article_authors(self, mock_run_query):
         # Mock the run_query function to return a predefined result
         mock_run_query.return_value = [
@@ -45,6 +49,7 @@ class TestLogAnalysis(unittest.TestCase):
         self.assertEqual(result[2][0], 'Author Z')
 
     @patch('logs_analysis.run_query')
+    @patch('logs_analysis.create_daily_logs_view', MagicMock())
     def test_get_days_with_more_than_one_percent_errors(self, mock_run_query):
         # Mock the run_query function to return a predefined result
         mock_run_query.return_value = [
